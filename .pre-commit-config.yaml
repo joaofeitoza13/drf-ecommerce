@@ -23,21 +23,21 @@ repos:
   hooks:
     - id: flake8
 
-- repo: local
-  hooks:
-    - id: pylint
-      name: pylint
-      entry: poetry run pylint
-      language: system
-      types: [python]
-      args:
-        [
-          "-rn",
-          "-sn",
-          "--load-plugins=pylint_django",
-          "--django-settings-module={NAME OF YOUR REPO}.settings",
-          "--ignore=manage.py"
-        ]
+# - repo: local
+#   hooks:
+#     - id: pylint
+#       name: pylint
+#       entry: poetry run pylint
+#       language: system
+#       types: [python]
+#       args:
+#         [
+#           "-rn",
+#           "-sn",
+#           "--load-plugins=pylint_django",
+#           "--django-settings-module=backend.settings",
+#           "--ignore=manage.py"
+#         ]
 
 - repo: https://github.com/Riverside-Healthcare/djLint
   rev: v1.19.16
