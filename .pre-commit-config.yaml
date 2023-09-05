@@ -11,12 +11,14 @@ repos:
   hooks:
   - id: black
     language_version: python3.10
+    stages: [commit, manual]
 
 - repo: https://github.com/pycqa/isort
   rev: 5.12.0
   hooks:
     - id: isort
       name: isort (python)
+      args: [--profile=black]
 
 - repo: https://github.com/pycqa/flake8
   rev: 6.0.0
