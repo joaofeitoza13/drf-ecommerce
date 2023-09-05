@@ -1,2 +1,8 @@
-.venv
-dotenv
+**__pycache__/
+
+.venv/
+dotenv/.env
+
+db.sqlite3
+.coverage
+.vscode
