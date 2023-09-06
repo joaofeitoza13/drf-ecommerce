@@ -48,9 +48,13 @@ spectacular:
 
 
 ### TESTS ###
-.PHONY: pytest
-pytest:
-	pytest;
+.PHONY: test
+test:
+	pytest
+
+.PHONY: test-verbose
+test-verbose:
+	pytest -s
 
 .PHONY: coverage
 coverage:
