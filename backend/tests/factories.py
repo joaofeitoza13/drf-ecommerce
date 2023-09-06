@@ -6,22 +6,22 @@ class CategoryFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Category
 
-    name = "test_category_name"
+    name = factory.Sequence(lambda n: "test_category_name_%d" % n)
 
 
 class BrandFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Brand
 
-    name = "test_brand_name"
+    name = factory.Sequence(lambda n: "test_brand_name_%d" % n)
 
 
 class ProductFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Product
 
-    name = "test_product_name"
-    description = "test_product_description"
+    name = factory.Sequence(lambda n: "test_product_name_%d" % n)
+    description = factory.Sequence(lambda n: "test_product_description_%d" % n)
     is_digital = True
     """
     The usage of the SubFactory assures the new
