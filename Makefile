@@ -41,6 +41,10 @@ runserver:
 createsuperuser:
 	py backend/manage.py createsuperuser
 
+.PHONY: spectacular
+spectacular:
+	py backend/manage.py spectacular --file schema.yml
+
 ### DOCKER ###
 .PHONY: backend
 backend:
