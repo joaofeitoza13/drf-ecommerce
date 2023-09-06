@@ -5,17 +5,17 @@ from .models import Brand, Category, Product
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        models = Category
+        model = Category
         fields = "__all__"
 
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Brand
+        model = Brand
         fields = "__all__"
 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
-        models = Product
+        model = Product
         fields = "__all__"

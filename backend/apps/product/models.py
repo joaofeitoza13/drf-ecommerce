@@ -15,12 +15,17 @@ class Category(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ["name"]
 
+    class Meta:
+        verbose_name_plural = "Categories"
+        db_table = "product_category"
+
     def __str__(self):
         return self.name
 
 
 class Brand(models.Model):
     name = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.name
@@ -31,9 +36,7 @@ class Product(models.Model):
     description = models.TextField(blank=True)
     is_digital = models.BooleanField(default=False)
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
-    category = TreeForeignKey(
-        "Category", on_delete=models.SET_NULL, null=True, blank=True
-    )  # type: ignore
+    category = TreeForeignKey("Category", on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.name
