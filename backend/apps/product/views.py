@@ -1,6 +1,18 @@
-from django.http import HttpResponse
+from rest_framework import viewsets
+from rest_framework.response import Response
+
+from .models import Category
+from .serializers import CategorySerializer
 
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello, World.")
+class CategoryViewSet(viewsets.ViewSet):
+    """
+    A simple ViewSet for viewing all categories
+    """
+
+    queryset = Category.objects.all()
+
+    def list(self, request):
+        serializer = CategorySerializer(self.queryset, many=True)
+        return Response(serializer.data)
