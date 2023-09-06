@@ -21,12 +21,16 @@ lint:
 update: install migrate install-pre-commit lint;
 
 ### DJANGO ###
+.PHONY: showmigrations
+showmigrations:
+	py backend/manage.py showmigrations
+
 .PHONY: migrate
 migrate:
 	py backend/manage.py migrate
 
-.PHONY: migrations
-migrations:
+.PHONY: makemigrations
+makemigrations:
 	py backend/manage.py makemigrations
 
 .PHONY: runserver
