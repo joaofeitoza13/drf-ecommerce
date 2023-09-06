@@ -1,0 +1,3 @@
+[run]
+source = backend
+omit = __init__.py, backend/core/settings/*, backend/core/asgi.py, backend/core/wsgi.py, backend/apps/product/migrations/*, backend/manage.py, backend/tests/*

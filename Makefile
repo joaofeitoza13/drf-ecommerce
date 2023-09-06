@@ -18,7 +18,8 @@ lint:
 	poetry run pre-commit run --all-files
 
 .PHONY: update
-update: install migrate install-pre-commit lint;
+update: install migrate install-pre-commit lint
+
 
 ### DJANGO ###
 .PHONY: showmigrations
@@ -45,19 +46,33 @@ createsuperuser:
 spectacular:
 	py backend/manage.py spectacular --file schema.yml
 
+
+### TESTS ###
+.PHONY: pytest
+pytest:
+	pytest;
+
+.PHONY: coverage
+coverage:
+	pytest --cov=backend
+
+.PHONY: relatory
+relatory:
+	coverage html
+
 ### DOCKER ###
-.PHONY: backend
-backend:
-	docker container exec -it tv_backend bash
+# .PHONY: backend
+# backend:
+# 	docker container exec -it tv_backend bash;
 
-.PHONY: root-backend
-root-backend:
-	docker container exec -it -u root tv_backend bash
+# .PHONY: root-backend
+# root-backend:
+# 	docker container exec -it -u root tv_backend bash;
 
-.PHONY:database
-database:
-	docker container exec -it tv_database bash
+# .PHONY:database
+# database:
+# 	docker container exec -it tv_database bash;
 
-.PHONY: root-database
-root-database:
-	docker container exec -it -u root tv_database bash
+# .PHONY: root-database
+# root-database:
+# 	docker container exec -it -u root tv_database bash;
