@@ -3,16 +3,16 @@
 import os
 import sys
 
-from backend.settings import base
+from core.settings import base
 
 
 def main():
     """Run administrative tasks."""
 
     if base.DEBUG:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings.local")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings.local")
     else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings.prod")
+        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings.prod")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
