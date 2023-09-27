@@ -1,5 +1,11 @@
-from django.db import models  # noqa: F401
+from django.db import models
+from django.db.models.query import QuerySet  # noqa: F401
 from mptt.models import MPTTModel, TreeForeignKey
+
+
+class ActiveManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_active=True)
 
 
 # Create your models here.
@@ -39,6 +45,8 @@ class Product(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
     category = TreeForeignKey("Category", on_delete=models.SET_NULL, null=True, blank=True)
     is_active = models.BooleanField(default=False)
+
+    isActive = ActiveManager()
 
     def __str__(self):
         return self.name

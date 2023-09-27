@@ -1,4 +1,3 @@
-import django.urls
 from rest_framework import serializers
 
 from .models import Brand, Category, Product, ProductLine
@@ -24,7 +23,7 @@ class ProductLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductLine
         # fields = "__all__"
-        exclude = ("id",)
+        exclude = ("id", "product", "is_active")
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -34,4 +33,12 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ("name", "slug", "description", "brand_name", "category_name", "product_line")
+        fields = (
+            "id",
+            "name",
+            "slug",
+            "description",
+            "brand_name",
+            "category_name",
+            "product_line",
+        )
