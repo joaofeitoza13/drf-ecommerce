@@ -695,6 +695,20 @@ files = [
 ]
 
 [[package]]
+name = "pygments"
+version = "2.16.1"
+description = "Pygments is a syntax highlighting package written in Python."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "Pygments-2.16.1-py3-none-any.whl", hash = "sha256:13fc09fa63bc8d8671a6d247e1eb303c4b343eaee81d861f3404db2935653692"},
+    {file = "Pygments-2.16.1.tar.gz", hash = "sha256:1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"},
+]
+
+[package.extras]
+plugins = ["importlib-metadata"]
+
+[[package]]
 name = "pylint"
 version = "2.17.5"
 description = "python code static checker"
@@ -1254,4 +1268,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "166ba45a2a0dcc079026881aef5d4d27ba0b9b280c54ab2450ced2f10ecb4719"
+content-hash = "e6e1b66b5f1cf7e6d8b85f7c44b67b4876ae08d239df4f154ce2596b8162e9d2"
