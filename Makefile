@@ -3,25 +3,29 @@
 ### POETRY ###
 .PHONY: activate
 activate:
-	poetry shell
+	C:\.dev\Python\pypoetry\bin\poetry.exe shell
 
 .PHONY: install
 install:
-	poetry install
+	C:\.dev\Python\pypoetry\bin\poetry.exe install
 
 .PHONY: install-pre-commit
 install-pre-commit:
-	poetry run pre-commit uninstall -t pre-commit; poetry run pre-commit install -t pre-commit
+	C:\.dev\Python\pypoetry\bin\poetry.exe run pre-commit uninstall -t pre-commit; C:\.dev\Python\pypoetry\bin\poetry.exe run pre-commit install -t pre-commit
 
 .PHONY: lint
 lint:
-	poetry run pre-commit run --all-files
+	C:\.dev\Python\pypoetry\bin\poetry.exe run pre-commit run --all-files
 
 .PHONY: update
 update: install migrate install-pre-commit lint
 
 
 ### DJANGO ###
+.PHONY: shell
+shell:
+	py backend/manage.py shell
+
 .PHONY: showmigrations
 showmigrations:
 	py backend/manage.py showmigrations
