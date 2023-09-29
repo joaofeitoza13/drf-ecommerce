@@ -5,6 +5,16 @@
   from django.core.management.utils import get_random_secret_key
   print(get_random_secret_key())
 
+## Some commands
+
+  Describes some useful and most used commands
+
+### Tests
+
+  pytest -k "function_name"  |-> runs tests only for the passed function
+  pytest -X                  |-> runs the tests and stops at the first fail
+  pytest --cov               |-> runs the tests and shows it's coverage
+
 ## settings.json adjustments to auto-format and auto-lint
 
   python -m pip install --upgrade pip

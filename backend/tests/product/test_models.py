@@ -29,3 +29,18 @@ class TestProductModel:
         data = product_factory(name="test_product")
 
         assert data.__str__() == "test_product"
+
+
+class TestProductLineModel:
+    def test_str_method(self, product_line_factory):
+        data = product_line_factory(sku="test_product_line")
+
+        print("")
+        print(type(data.price))
+
+        assert data.__str__() == "test_product_line"
+
+    def test_clean_fields_method(self, product_line_factory):
+        # qs = ProductLine
+        # data = product_line_factory()
+        pass

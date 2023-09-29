@@ -1,5 +1,5 @@
 import factory
-from apps.product.models import Brand, Category, Product
+from apps.product.models import Brand, Category, Product, ProductLine
 
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -31,3 +31,17 @@ class ProductFactory(factory.django.DjangoModelFactory):
     brand = factory.SubFactory(BrandFactory)
     category = factory.SubFactory(CategoryFactory)
     is_active = True
+
+
+class ProductLineFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProductLine
+
+    price = factory.Sequence(lambda n: round(n + 10, 2))
+    sku = factory.Sequence(lambda n: "test_product_line_sku_%d" % n)
+    stock_qty = factory.Sequence(lambda n: n)
+    product = factory.SubFactory(ProductFactory)
+    is_active = True
+    order = factory.Sequence(lambda n: n)
+
+    phrase = "A função tuple funciona de maneira similar"

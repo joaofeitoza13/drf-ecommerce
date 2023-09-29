@@ -1,11 +1,18 @@
 from django.db import models
-from django.db.models.query import QuerySet  # noqa: F401
 from mptt.models import MPTTModel, TreeForeignKey
+from django.core.exceptions import ValidationError
 
 
-class ActiveManager(models.Manager):
-    def get_queryset(self):
-        return super().get_queryset().filter(is_active=True)
+from .fields import OrderField
+
+# class ActiveManager(models.Manager):
+#     def get_queryset(self):
+#         return super().get_queryset().filter(is_active=True)
+
+
+class ActiveQuerySet(models.QuerySet):
+    def isActive(self):
+        return self.filter(is_active=True)
 
 
 # Create your models here.
@@ -17,6 +24,9 @@ class Category(MPTTModel):
         null=True,
         blank=True,
     )
+    is_active = models.BooleanField(default=False)
+
+    objects = ActiveQuerySet.as_manager()
 
     class MPTTMeta:
         order_insertion_by = ["name"]
@@ -33,6 +43,8 @@ class Brand(models.Model):
     name = models.CharField(max_length=100, unique=True)
     is_active = models.BooleanField(default=True)
 
+    objects = ActiveQuerySet.as_manager()
+
     def __str__(self):
         return self.name
 
@@ -46,7 +58,8 @@ class Product(models.Model):
     category = TreeForeignKey("Category", on_delete=models.SET_NULL, null=True, blank=True)
     is_active = models.BooleanField(default=False)
 
-    isActive = ActiveManager()
+    # isActive = ActiveManager()
+    objects = ActiveQuerySet.as_manager()
 
     def __str__(self):
         return self.name
@@ -58,6 +71,10 @@ class ProductLine(models.Model):
     stock_qty = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_line")
     is_active = models.BooleanField(default=False)
+    order = OrderField(unique_for_field="product", blank=True)
+    # order = OrderField(blank=True)
+
+    objects = ActiveQuerySet.as_manager()
 
     class Meta:
         db_table = "product_line"
@@ -66,3 +83,10 @@ class ProductLine(models.Model):
 
     def __str__(self):
         return self.sku
+
+    def clean_fields(self, exclude=None):
+        super().clean_fields(exclude=exclude)
+        qs = ProductLine.objects.filter(product=self.product)
+        for obj in qs:
+            if obj.id != self.id and self.order == obj.order:
+                raise ValidationError("Duplicate value.")
